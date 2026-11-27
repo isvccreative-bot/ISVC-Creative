@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+
+    <title>ISVC — Creative Video Editing Studio</title>
+    <meta name="description" content="ISVC menyediakan jasa video editing kreatif untuk cinematic video, social media content, reels, TikTok, dan video promosi.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #101010;
+            --surface: #191919;
+            --surface2: #222222;
+            --white: #f2f0eb;
+            --muted: #999999;
+            --gray: #c4c1ba;
+            --border: rgba(255,255,255,.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(255,255,255,.045), transparent 30%),
+                radial-gradient(circle at 85% 65%, rgba(255,255,255,.025), transparent 35%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1160px, 88%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 115px 0;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            font-size: clamp(37px, 6vw, 70px);
+            line-height: 1.08;
+            letter-spacing: -3px;
+            font-weight: 800;
+        }
+
+        .gradient {
+            background: linear-gradient(110deg, #fff, #858585);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* NAVIGATION */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 23px 0;
+            background: rgba(16,16,16,.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: var(--muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            color: var(--muted);
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-order {
+            padding: 11px 19px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--white) !important;
+        }
+
+        .nav-order:hover {
+            background: var(--white);
+            color: #111 !important;
+        }
+
+        /* BUTTON */
+
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 40px;
+            font-size: 11px;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .button-primary {
+            background: var(--white);
+            color: #111;
+        }
+
+        .button-primary:hover {
+            background: #ccc;
+            transform: translateY(-4px);
+        }
+
+        .button-outline {
+            border: 1px solid var(--border);
+            color: var(--white);
+        }
+
+        .button-outline:hover {
+            background: rgba(255,255,255,.09);
+            transform: translateY(-4px);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 150px 0 110px;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 30px;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #bcbcbc;
+            box-shadow: 0 0 10px rgba(255,255,255,.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 120px);
+            font-weight: 900;
+            letter-spacing: -8px;
+            line-height: .95;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero-description {
+            max-width: 510px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 35px;
+            left: 6%;
+            right: 6%;
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* MARQUEE */
+
+        .marquee {
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 22px 0;
+            background: rgba(255,255,255,.02);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-track span {
+            padding: 0 35px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 65px;
+            margin-top: 50px;
+        }
+
+        .about-text {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .about-text p {
+            margin-bottom: 18px;
+        }
+
+        .about-visual {
+            min-height: 390px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.12), transparent 60%),
+                linear-gradient(135deg, #393939, #111 75%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: "ISVC";
+            font-size: clamp(80px, 13vw, 150px);
+            font-weight: 900;
+            letter-spacing: -10px;
+            color: rgba(255,255,255,.09);
+        }
+
+        .about-caption {
+            position: absolute;
+            left: 25px;
+            bottom: 25px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #ccc;
+        }
+
+        /* SERVICES */
+
+        .services-intro {
+            max-width: 500px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+            margin-top: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            padding: 35px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 18px;
+            transition: .35s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            background: var(--surface2);
+            border-color: rgba(255,255,255,.4);
+        }
+
+        .service-number {
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 35px;
+        }
+
+        .service-icon {
+            font-size: 26px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 13px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* WHY CHOOSE US */
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+            margin-top: 50px;
+        }
+
+        .why-card {
+            padding: 27px 22px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--surface);
+        }
+
+        .why-card h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .why-card p {
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .why-number {
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        /* PORTFOLIO */
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 25px;
+        }
+
+        .portfolio-description {
+            max-width: 260px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .project-image {
+            height: 320px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            position: relative;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .project-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 60%);
+        }
+
+        .project-image.one {
+            background: linear-gradient(135deg, #555, #181818 75%);
+        }
+
+        .project-image.two {
+            background: linear-gradient(135deg, #222, #777 50%, #111);
+        }
+
+        .project-image.three {
+            background: linear-gradient(135deg, #666, #242424 65%);
+        }
+
+        .project-image.four {
+            background: linear-gradient(135deg, #222, #555 50%, #151515);
+        }
+
+        .project-art {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(50px, 8vw, 90px);
+            font-weight: 900;
+            letter-spacing: -6px;
+            color: rgba(255,255,255,.2);
+        }
+
+        .project:hover .project-image {
+            transform: translateY(-5px) scale(1.01);
+            border-color: rgba(255,255,255,.4);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 17px;
+            gap: 15px;
+        }
+
+        .project-info h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .project-info p {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        .project-arrow {
+            color: var(--muted);
+            font-size: 20px;
+        }
+
+        .portfolio-cta {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* PROCESS */
+
+        .process-list {
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 70px 1fr 1fr;
+            align-items: center;
+            gap: 25px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .process-number {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .process-item h3 {
+            font-size: 20px;
+        }
+
+        .process-item p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* FAQ */
+
+        .faq-list {
+            margin-top: 45px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--white);
+            padding: 24px 0;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            color: var(--muted);
+            transition: .3s;
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+            padding: 0 30px 23px 0;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* CONTACT */
+
+        .contact-box {
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 80px 30px;
+            text-align: center;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,255,255,.1), transparent 55%),
+                var(--surface);
+        }
+
+        .contact-box h2 {
+            font-size: clamp(40px, 7vw, 78px);
+            letter-spacing: -4px;
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .contact-box p {
+            max-width: 480px;
+            margin: 0 auto 30px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .contact-note {
+            margin-top: 25px;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-content p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            font-size: 10px;
+            transition: .3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* REVEAL */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 850px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 768px) {
+            .section {
+                padding: 85px 0;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3),
+            .nav-links a:nth-child(4) {
+                display: none;
+            }
+
+            .hero h1 {
+                letter-spacing: -4px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .about-visual {
+                min-height: 270px;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image {
+                height: 260px;
+            }
+
+            .portfolio-header {
+                display: block;
+            }
+
+            .portfolio-description {
+                margin-top: 18px;
+            }
+
+            .process-item {
+                grid-template-columns: 40px 1fr;
+                gap: 15px;
+            }
+
+            .process-item p {
+                grid-column: 2;
+            }
+
+            .contact-box {
+                padding: 55px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media(max-width: 420px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-order {
+                padding: 9px 12px;
+            }
+        }
+
+        @media(prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+        <div class="container nav-content">
+
+            <a href="#home" class="logo">IS<span>VC.</span></a>
+
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="nav-order">Order Now ↗</a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+
+            <div class="hero-tag reveal">
+                <span class="status-dot"></span>
+                CREATIVE VIDEO EDITING STUDIO
+            </div>
+
+            <h1 class="hero-title">
+                <span>YOUR VISION.</span>
+                <span class="gradient">OUR CREATIVITY.</span>
+            </h1>
+
+            <p class="hero-description reveal">
+                Creative video editing for brands, creators, and individuals.
+                We transform your raw footage into engaging visual stories
+                that leave a lasting impression.
+            </p>
+
+            <div class="hero-buttons reveal">
+                <a href="https://wa.me/6289666127900?text=Halo%20ISVC%2C%20saya%20tertarik%20menggunakan%20jasa%20video%20editing."
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="button button-primary">
+                    Order Your Edit ↗
+                </a>
+
+                <a href="#portfolio" class="button button-outline">
+                    Explore Portfolio ↓
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-bottom">
+            <span>ISVC — IKHSANUL VISUAL CREATIVE</span>
+            <span>SCROLL TO EXPLORE ↓</span>
+        </div>
+    </section>
+
+
+    <!-- MARQUEE -->
+
+    <div class="marquee">
+        <div class="marquee-track">
+            <span>VIDEO EDITING ✦</span>
+            <span>CINEMATIC VISUAL ✦</span>
+            <span>CONTENT CREATION ✦</span>
+            <span>COLOR GRADING ✦</span>
+            <span>CREATIVE STORYTELLING ✦</span>
+
+            <span>VIDEO EDITING ✦</span>
+            <span>CINEMATIC VISUAL ✦</span>
+            <span>CONTENT CREATION ✦</span>
+            <span>COLOR GRADING ✦</span>
+            <span>CREATIVE STORYTELLING ✦</span>
+        </div>
+    </div>
+
+
+    <!-- ABOUT -->
+
+    <section class="section" id="about">
+        <div class="container">
+
+            <div class="section-label reveal">01 / ABOUT ISVC</div>
+
+            <h2 class="section-title reveal">
+                More Than Just<br>
+                <span class="gradient">Video Editing.</span>
+            </h2>
+
+            <div class="about-grid">
+
+                <div class="about-text reveal">
+                    <p>
+                        ISVC (Ikhsanul Visual Creative) is a creative
+                        video editing service focused on transforming
+                        ideas and footage into engaging visual content.
+                    </p>
+
+                    <p>
+                        We believe every video has a story worth telling.
+                        Through creative editing, visual composition,
+                        and thoughtful details, we help bring that story
+                        to life.
+                    </p>
+
+                    <p>
+                        Whether it's cinematic content, social media videos,
+                        or promotional projects, ISVC is ready to help
+                        you create something memorable.
+                    </p>
+
+                    <a href="#services" class="button button-outline">
+                        Discover Our Services ↗
+                    </a>
+                </div>
+
+                <div class="about-visual reveal">
+                    <div class="about-caption">
+                        IKHSANUL VISUAL CREATIVE
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section class="section" id="services">
+        <div class="container">
+
+            <div class="section-label reveal">02 / WHAT WE DO</div>
+
+            <h2 class="section-title reveal">
+                Our Creative<br>
+                <span class="gradient">Services.</span>
+            </h2>
+
+            <p class="services-intro reveal">
+                From short-form content to cinematic storytelling,
+                we provide editing services to help your visual ideas
+                stand out.
+            </p>
+
+            <div class="services-grid">
+
+                <div class="service-card reveal">
+                    <div class="service-number">01 / SERVICE</div>
+                    <div class="service-icon">✳</div>
+                    <h3>Cinematic Video Editing</h3>
+                    <p>
+                        Turn your footage into cinematic visuals with
+                        smooth transitions, atmosphere, and storytelling
+                        that captures attention.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-number">02 / SERVICE</div>
+                    <div class="service-icon">◈</div>
+                    <h3>Reels & TikTok Editing</h3>
+                    <p>
+                        Engaging short-form videos with clean cuts,
+                        subtitles, transitions, and dynamic pacing
+                        for social media.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-number">03 / SERVICE</div>
+                    <div class="service-icon">▧</div>
+                    <h3>Promotional Video</h3>
+                    <p>
+                        Present your products, services, or events
+                        through attractive video content designed
+                        to communicate your message.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-number">04 / SERVICE</div>
+                    <div class="service-icon">◉</div>
+                    <h3>Color Grading</h3>
+                    <p>
+                        Enhance your footage with balanced colors,
+                        contrast, and visual moods to create
+                        a consistent atmosphere.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-number">05 / SERVICE</div>
+                    <div class="service-icon">▤</div>
+                    <h3>Video Enhancement</h3>
+                    <p>
+                        Improve your video presentation through
+                        thoughtful editing, typography, audio,
+                        and visual details.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-number">06 / SERVICE</div>
+                    <div class="service-icon">✦</div>
+                    <h3>Custom Editing</h3>
+                    <p>
+                        Have a unique editing concept? Let's discuss
+                        your ideas and find the right creative
+                        direction for your project.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- WHY CHOOSE ISVC -->
+
+    <section class="section">
+        <div class="container">
+
+            <div class="section-label reveal">03 / WHY ISVC</div>
+
+            <h2 class="section-title reveal">
+                Why Work With<br>
+                <span class="gradient">ISVC?</span>
+            </h2>
+
+            <div class="why-grid">
+
+                <div class="why-card reveal">
+                    <div class="why-number">01</div>
+                    <h3>Creative Approach</h3>
+                    <p>
+                        Every project gets attention to its concept,
+                        style, and visual direction.
+                    </p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-number">02</div>
+                    <h3>Attention to Detail</h3>
+                    <p>
+                        We focus on transitions, timing, composition,
+                        and the little details that matter.
+                    </p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-number">03</div>
+                    <h3>Personalized Style</h3>
+                    <p>
+                        Editing direction can be discussed according
+                        to your needs and preferences.
+                    </p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-number">04</div>
+                    <h3>Easy Communication</h3>
+                    <p>
+                        Discuss your project directly with ISVC
+                        through WhatsApp.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PORTFOLIO -->
+
+    <section class="section" id="portfolio">
+        <div class="container">
+
+            <div class="section-label reveal">04 / SELECTED WORKS</div>
+
+            <div class="portfolio-header">
+                <h2 class="section-title reveal">
+                    Our Creative<br>
+                    <span class="gradient">Portfolio.</span>
+                </h2>
+
+                <p class="portfolio-description reveal">
+                    Explore our creative direction and visual
+                    editing concepts. Your project could be
+                    the next one featured here.
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+
+                <div class="project reveal">
+                    <div class="project-image one">
+                        <div class="project-art">01</div>
+                    </div>
+
+                    <div class="project-info">
+                        <div>
+                            <h3>Cinematic Story</h3>
+                            <p>CINEMATIC / VIDEO EDITING</p>
+                        </div>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                </div>
+
+                <div class="project reveal">
+                    <div class="project-image two">
+                        <div class="project-art">02</div>
+                    </div>
+
+                    <div class="project-info">
+                        <div>
+                            <h3>Social Media Content</h3>
+                            <p>REELS / TIKTOK</p>
+                        </div>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                </div>
+
+                <div class="project reveal">
+                    <div class="project-image three">
+                        <div class="project-art">03</div>
+                    </div>
+
+                    <div class="project-info">
+                        <div>
+                            <h3>Visual Atmosphere</h3>
+                            <p>COLOR GRADING / VISUAL</p>
+                        </div>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                </div>
+
+                <div class="project reveal">
+                    <div class="project-image four">
+                        <div class="project-art">04</div>
+                    </div>
+
+                    <div class="project-info">
+                        <div>
+                            <h3>Brand Promotion</h3>
+                            <p>PROMOTIONAL / CREATIVE</p>
+                        </div>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="portfolio-cta reveal">
+                Want to see your project here?
+                <a href="#contact" class="gradient">Let's work together ↗</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ORDER PROCESS -->
+
+    <section class="section" id="process">
+        <div class="container">
+
+            <div class="section-label reveal">05 / HOW TO ORDER</div>
+
+            <h2 class="section-title reveal">
+                Simple Steps.<br>
+                <span class="gradient">Creative Results.</span>
+            </h2>
+
+            <div class="process-list">
+
+                <div class="process-item reveal">
+                    <div class="process-number">01</div>
+                    <h3>Contact ISVC</h3>
+                    <p>
+                        Send us a message and tell us about
+                        the video editing service you need.
+                    </p>
+                </div>
+
+                <div class="process-item reveal">
+                    <div class="process-number">02</div>
+                    <h3>Discuss Your Project</h3>
+                    <p>
+                        Share your concept, references, footage,
+                        and desired editing style.
+                    </p>
+                </div>
+
+                <div class="process-item reveal">
+                    <div class="process-number">03</div>
+                    <h3>Editing Process</h3>
+                    <p>
+                        Once the details are agreed upon,
+                        your video enters the editing process.
+                    </p>
+                </div>
+
+                <div class="process-item reveal">
+                    <div class="process-number">04</div>
+                    <h3>Review & Delivery</h3>
+                    <p>
+                        Review the result, discuss any agreed
+                        revisions, and receive your final video.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section class="section" id="faq">
+        <div class="container">
+
+            <div class="section-label reveal">06 / FAQ</div>
+
+            <h2 class="section-title reveal">
+                Frequently Asked<br>
+                <span class="gradient">Questions.</span>
+            </h2>
+
+            <div class="faq-list">
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" type="button">
+                        What kind of videos can I order?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        You can discuss cinematic videos, social media
+                        content, Reels, TikTok, promotional videos,
+                        and other custom editing projects with ISVC.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" type="button">
+                        How much does video editing cost?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Pricing depends on the video duration,
+                        editing complexity, and project requirements.
+                        Contact ISVC for a quotation.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" type="button">
+                        How do I send my footage?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        You can discuss the file delivery method
+                        directly with ISVC through WhatsApp.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" type="button">
+                        Can I request revisions?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Revision details can be discussed before
+                        the project starts so expectations are clear.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" type="button">
+                        How do I place an order?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Simply click the Order Now button and
+                        contact ISVC through WhatsApp to discuss
+                        your project.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="section" id="contact">
+        <div class="container">
+
+            <div class="contact-box reveal">
+
+                <div class="section-label">07 / LET'S WORK TOGETHER</div>
+
+                <h2>
+                    Ready To Make<br>
+                    <span class="gradient">Your Video Stand Out?</span>
+                </h2>
+
+                <p>
+                    Have a project in mind?
+                    Let's turn your footage and ideas into
+                    something worth watching.
+                    Contact ISVC and start your next creative project.
+                </p>
+
+                <div class="contact-buttons">
+
+                    <a href="https://wa.me/6289666127900?text=Halo%20ISVC%2C%20saya%20ingin%20bertanya%20tentang%20jasa%20video%20editing."
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="button button-primary">
+                        ORDER NOW VIA WHATSAPP ↗
+                    </a>
+
+                    <a href="https://www.instagram.com/panggilajainul?bqrl=b2Flc3B4ODF3eHky"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="button button-outline">
+                        INSTAGRAM ↗
+                    </a>
+
+                </div>
+
+                <div class="contact-note">
+                    ISVC — IKHSANUL VISUAL CREATIVE
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="container footer-content">
+
+            <p>© 2026 ISVC. All Rights Reserved.</p>
+
+            <div class="footer-links">
+                <a href="#home">BACK TO TOP ↑</a>
+
+                <a href="https://www.instagram.com/panggilajainul?bqrl=b2Flc3B4ODF3eHky"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    INSTAGRAM
+                </a>
+
+                <a href="https://wa.me/6289666127900"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    WHATSAPP
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- LIBRARIES -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+        // REGISTER GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+
+        // LENIS SMOOTH SCROLL
+        const lenis = new Lenis({
+            duration: 1.2,
+            smoothWheel: true,
+            wheelMultiplier: 1
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+
+        // HERO ANIMATION
+        const heroTimeline = gsap.timeline({
+            defaults: {
+                ease: "power3.out"
+            }
+        });
+
+        heroTimeline
+            .from(".hero-tag", {
+                y: 25,
+                opacity: 0,
+                duration: .7
+            })
+            .from(".hero-title span", {
+                y: 100,
+                opacity: 0,
+                stagger: .18,
+                duration: 1
+            }, "-=.3")
+            .from(".hero-description", {
+                y: 25,
+                opacity: 0,
+                duration: .8
+            }, "-=.4")
+            .from(".hero-buttons", {
+                y: 20,
+                opacity: 0,
+                duration: .7
+            }, "-=.4");
+
+
+        // SCROLL REVEAL
+        gsap.utils.toArray(".reveal").forEach((element) => {
+
+            if (element.closest(".hero")) {
+                return;
+            }
+
+            gsap.fromTo(element,
+                {
+                    y: 40,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: .9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 88%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
+        });
+
+
+        // PROJECT HOVER
+        document.querySelectorAll(".project").forEach((project) => {
+
+            const image = project.querySelector(".project-image");
+
+            project.addEventListener("mouseenter", () => {
+                gsap.to(image, {
+                    scale: 1.025,
+                    duration: .4,
+                    ease: "power2.out"
+                });
+            });
+
+            project.addEventListener("mouseleave", () => {
+                gsap.to(image, {
+                    scale: 1,
+                    duration: .4,
+                    ease: "power2.out"
+                });
+            });
+
+        });
+
+
+        // FAQ ACCORDION
+        document.querySelectorAll(".faq-question").forEach((button) => {
+
+            button.addEventListener("click", () => {
+
+                const item = button.closest(".faq-item");
+                const isActive = item.classList.contains("active");
+
+                document.querySelectorAll(".faq-item").forEach((faq) => {
+                    faq.classList.remove("active");
+                });
+
+                if (!isActive) {
+                    item.classList.add("active");
+                }
+
+            });
+
+        });
+
+
+        // REFRESH SCROLL TRIGGER
+        window.addEventListener("load", () => {
+            ScrollTrigger.refresh();
+        });
+
+    </script>
+
+</body>
+</html>
